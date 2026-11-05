@@ -178,6 +178,14 @@ describe('modern MCP transport', () => {
 		expect(body.error.code).toBe(-32601);
 	});
 
+	it('rejects the removed initialize handshake in the modern era', async () => {
+		const response = await SELF.fetch(modernRequest('initialize'));
+		expect(response.status).toBe(404);
+		const body = (await response.json()) as Record<string, any>;
+		expect(body.error.code).toBe(-32601);
+		expect(body.result).toBeUndefined();
+	});
+
 	it('rejects a disallowed Origin', async () => {
 		const response = await SELF.fetch(modernRequest('tools/list', {}, { headers: { Origin: 'https://evil.example' } }));
 		expect(response.status).toBe(403);

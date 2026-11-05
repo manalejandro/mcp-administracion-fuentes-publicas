@@ -271,6 +271,12 @@ function handleModern(request: Request, body: Record<string, unknown>): Response
 		return jsonResponse(rpcError(id, -32020, headerError), 400, request);
 	}
 
+	// The 2026-07-28 revision replaced the initialize handshake with
+	// server/discover. Answering it here with a 2025 version would be a lie.
+	if (body.method === 'initialize') {
+		return jsonResponse(rpcError(id, -32601, 'Method not found: initialize. Use server/discover in this protocol version.'), 404, request);
+	}
+
 	const outcome = dispatch(body.method as string, params);
 	if (outcome.kind === 'error') {
 		return sendRpc(
