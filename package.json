@@ -1,19 +1,30 @@
 {
-  "name": "mcp-administracion-fuentes-publicas",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "test": "vitest",
-    "cf-typegen": "wrangler types"
-  },
-  "devDependencies": {
-    "@cloudflare/vitest-plugin": "^1.4.3",
-    "@types/node": "^26.6.6",
-    "typescript": "^5.5.2",
-    "vitest": "~5.0.3",
-    "wrangler": "^4.158.0"
-  }
+	"name": "mcp-administracion-fuentes-publicas",
+	"version": "1.0.0",
+	"description": "Remote MCP server for the Spanish public data catalog (Administración fuentes públicas).",
+	"license": "MIT",
+	"type": "module",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/manalejandro/mcp-administracion-fuentes-publicas.git"
+	},
+	"homepage": "https://mcp-afp.manalejandro.com",
+	"scripts": {
+		"data:sync": "node scripts/sync-data.mjs",
+		"typecheck": "tsc --noEmit",
+		"check": "npm run typecheck && npm run test -- --run",
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-plugin": "^1.4.3",
+		"@types/node": "^26.6.6",
+		"typescript": "^5.5.2",
+		"vitest": "~5.0.3",
+		"wrangler": "^4.158.0"
+	}
 }
